@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=What The Duck
+Comment=Quack!
+Exec=what_the_duck
+Icon=app
+Terminal=false
+Type=Application
+Categories=Utility;
