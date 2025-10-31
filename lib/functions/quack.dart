@@ -10,9 +10,15 @@ Future<Duck?> quack(BuildContext context, WidgetRef ref) async {
     if (duck == null) {
       throw Exception('Failed to fetch duck');
     }
-    await precacheImage(NetworkImage(duck.imageUrl), context);
+    if (context.mounted) {
+      await precacheImage(NetworkImage(duck.imageUrl), context);
+    } else {
+      throw Exception('Context not mounted');
+    }
   } catch (e) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Woopsie 0_0, something went quack!')));
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Woopsie 0_0, something went quack!')));
+    }
     ref.read(duckPageStateProvider.notifier).state = DuckPageState.error;
     return null;
   }
