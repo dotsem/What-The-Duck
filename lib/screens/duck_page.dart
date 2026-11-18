@@ -8,7 +8,7 @@ import 'package:what_the_duck/functions/quack.dart';
 import 'package:what_the_duck/providers/duck_page_provider.dart';
 
 class CounterPage extends ConsumerWidget {
-  const CounterPage({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
