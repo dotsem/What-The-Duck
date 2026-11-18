@@ -1,0 +1,23 @@
+name: Release
+
+on:
+    release:
+        types: [published]
+    workflow_dispatch:
+        inputs:
+            tag:
+                description: "Release tag"
+                required: false
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: false
+
+jobs:
+    cd:
+        uses: dotactions/flutter/.github/workflows/cd.yml@3290bcaf8b46e39b7f3126778f3ca23bec7adb16 # v0.1.0
+        permissions:
+            contents: write
+        with:
+            targets: '["linux", "windows", "macos", "android-aab"]'
+            tag: ${{ inputs.tag || github.event.release.tag_name }}

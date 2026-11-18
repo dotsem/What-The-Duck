@@ -1,0 +1,23 @@
+name: CI Pipeline
+
+on:
+    push:
+        branches: [master]
+        paths-ignore: ["**.md"]
+    pull_request:
+        branches: ["**"]
+        paths-ignore: ["**.md"]
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    ci:
+        uses: dotactions/flutter/.github/workflows/ci.yml@3290bcaf8b46e39b7f3126778f3ca23bec7adb16 # v0.1.0
+        with:
+            pr-targets: '["linux"]'
+            push-targets: '["android-aab", "linux", "windows", "macos"]'
+
+            pr-build-mode: "debug"
+            push-build-mode: "release"
