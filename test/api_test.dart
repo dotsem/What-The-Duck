@@ -8,7 +8,10 @@ void main() {
       expect(duck, isNotNull);
       expect(duck!.imageUrl, isNotEmpty);
       expect(Uri.tryParse(duck.imageUrl)?.hasAbsolutePath, isTrue);
-      expect(duck.imageUrl, anyOf(contains('.jpg'), contains('.png'), contains('.gif')));
+      expect(
+        duck.imageUrl.toLowerCase(),
+        anyOf(contains('.jpg'), contains('.png'), contains('.gif')),
+      );
     });
   });
 }
