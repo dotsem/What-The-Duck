@@ -19,5 +19,5 @@ jobs:
         permissions:
             contents: write
         with:
-            targets: '["linux", "windows", "macos", "android-aab"]'
+            targets: '["linux", "windows", "macos", "android-aab", "android-apk"]'
             tag: ${{ inputs.tag || github.event.release.tag_name }}
