@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DuckImage extends StatelessWidget {
-  const DuckImage({required this.imageUrl, super.key});
+  const new({required this.imageUrl, super.key});
   final String imageUrl;
 
   @override
