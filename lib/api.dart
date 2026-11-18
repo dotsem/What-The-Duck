@@ -1,3 +1,3 @@
-const apiUrl = "https://random-d.uk/api/v2";
+const apiUrl = 'https://random-d.uk/api/v2';
 
-const randomDuckImageEndUrl = "$apiUrl/quack";
+const randomDuckImageEndUrl = '$apiUrl/quack';

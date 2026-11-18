@@ -8,11 +8,9 @@ ThemeData theme = ThemeData(
 
 ColorScheme colorTheme = ColorScheme.light(
   primary: Colors.yellow.shade700,
-  onPrimary: Colors.white,
   secondary: Colors.blueGrey.shade900,
   onSecondary: Colors.white,
   tertiary: Colors.green.shade700,
   onTertiary: Colors.white,
-  surface: Color(0xFFF1F1F1),
-  onSurface: Colors.black,
+  surface: const Color(0xFFF1F1F1),
 );

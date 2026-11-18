@@ -8,23 +8,34 @@ class QuackButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final DuckPageState pageState = ref.watch(duckPageStateProvider);
+    final pageState = ref.watch(duckPageStateProvider);
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: SizedBox(
         height: 64,
         child: TweenAnimationBuilder<Color?>(
-          tween: ColorTween(begin: Theme.of(context).colorScheme.primary, end: pageState == DuckPageState.loading ? Theme.of(context).colorScheme.secondary : Theme.of(context).colorScheme.primary),
+          tween: ColorTween(
+            begin: Theme.of(context).colorScheme.primary,
+            end: pageState == DuckPageState.loading
+                ? Theme.of(context).colorScheme.secondary
+                : Theme.of(context).colorScheme.primary,
+          ),
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeInOut,
           builder: (context, color, child) {
             final bg = color ?? Theme.of(context).colorScheme.primary;
             return ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: bg, foregroundColor: Theme.of(context).colorScheme.onPrimary),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: bg,
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
+              ),
               onPressed: () async {
                 if (pageState == DuckPageState.loading) return;
-                ref.read(duckProvider.notifier).state = await quack(context, ref);
+                ref.read(duckProvider.notifier).state = await quack(
+                  context,
+                  ref,
+                );
               },
               child: child,
             );

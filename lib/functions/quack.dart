@@ -15,9 +15,11 @@ Future<Duck?> quack(BuildContext context, WidgetRef ref) async {
     } else {
       throw Exception('Context not mounted');
     }
-  } catch (e) {
+  } on Exception {
     if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Woopsie 0_0, something went quack!')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Woopsie 0_0, something went quack!')),
+      );
     }
     ref.read(duckPageStateProvider.notifier).state = DuckPageState.error;
     return null;
