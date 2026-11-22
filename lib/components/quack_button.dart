@@ -32,6 +32,7 @@ class QuackButton extends ConsumerWidget {
               ),
               onPressed: () async {
                 if (pageState == DuckPageState.loading) return;
+                quackVerbally();
                 ref.read(duckProvider.notifier).state = await quack(
                   context,
                   ref,
