@@ -6,6 +6,7 @@ import 'package:what_the_duck/components/loading.dart';
 import 'package:what_the_duck/components/quack_button.dart';
 import 'package:what_the_duck/functions/quack.dart';
 import 'package:what_the_duck/providers/duck_page_provider.dart';
+import 'package:what_the_duck/providers/sound_provider.dart';
 
 class CounterPage extends ConsumerWidget {
   const new({super.key});
@@ -20,27 +21,43 @@ class CounterPage extends ConsumerWidget {
       });
     }
 
+    final soundEnabled = ref.watch(soundEnabledProvider);
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () =>
+                ref.read(soundEnabledProvider.notifier).update((s) => !s),
+            tooltip: soundEnabled ? 'Mute' : 'Unmute',
+            icon: soundEnabled
+                ? const Icon(Icons.volume_up)
+                : const Icon(Icons.volume_off),
+          ),
+        ],
+      ),
 
-      body: Center(
-        child: Builder(
-          builder: (context) {
-            switch (pageState) {
-              case DuckPageState.error:
-                return const ErrorImage();
-              case DuckPageState.loading:
-                return const LoadingIndicator();
-              case DuckPageState.loaded:
-                if (duck == null) {
+      body: SafeArea(
+        child: Center(
+          child: Builder(
+            builder: (context) {
+              switch (pageState) {
+                case DuckPageState.error:
                   return const ErrorImage();
-                } else {
-                  return DuckImage(imageUrl: duck.imageUrl);
-                }
-              case DuckPageState.initial:
-                return const LoadingIndicator();
-            }
-          },
+                case DuckPageState.loading:
+                  return const LoadingIndicator();
+                case DuckPageState.loaded:
+                  if (duck == null) {
+                    return const ErrorImage();
+                  } else {
+                    return DuckImage(imageUrl: duck.imageUrl);
+                  }
+                case DuckPageState.initial:
+                  return const LoadingIndicator();
+              }
+            },
+          ),
         ),
       ),
 

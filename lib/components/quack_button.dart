@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:what_the_duck/functions/quack.dart';
 import 'package:what_the_duck/providers/duck_page_provider.dart';
+import 'package:what_the_duck/providers/sound_provider.dart';
 
 class QuackButton extends ConsumerWidget {
   const new({super.key});
@@ -32,7 +33,7 @@ class QuackButton extends ConsumerWidget {
               ),
               onPressed: () async {
                 if (pageState == DuckPageState.loading) return;
-                quackVerbally();
+                if (ref.read(soundEnabledProvider)) quackVerbally();
                 ref.read(duckProvider.notifier).state = await quack(
                   context,
                   ref,
